@@ -1486,7 +1486,7 @@
             rename: 'Zmień nazwę',
             extract: 'Rozpakuj',
             compress: 'Skompresuj',
-            install: 'zainstalować',
+            install: 'Zainstalować',
             error_invalid_filename: 'Błędna nazwa pliku lub plik o takiej nazwie już istnieje, proszę użyć innej nazwy',
             error_modifying: 'Wystąpił błąd podczas modyfikowania pliku',
             error_deleting: 'Wystąpił błąd podczas usuwania pliku lub folderu',
