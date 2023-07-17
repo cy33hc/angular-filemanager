@@ -147,26 +147,51 @@
             self.inprocess = true;
             self.progress = 0;
             self.error = '';
+            self.total_size = 0;
+            self.total_loaded = 0;
+            self.status = [];
+            for (var i = 0; i < files.length; i++) {
+                self.status[files[i].name] = {};
+                self.total_size += files[i].size;
+            }
 
             for (var i = 0; i < files.length; i++) {
                 var data = {
                     destination: destination,
                     file: files[i]
                 };
+                self.status[files[i].name].size = files[i].size;
+                self.status[files[i].name].loaded = 0;
+                self.status.push(self.status[files[i].name]);
+
                 Upload.upload({
                     url: apiUrl,
                     data: data,
                     resumeSizeUrl: uploadResumeSizeUrl + '?destination=' + encodeURIComponent(destination) + '&filename=' + encodeURIComponent(files[i].name),
                     resumeChunkSize: resumeChunkSize
                 }).then(function (data) {
-                    self.deferredHandler(data.data, deferred, data.status);
+                    if (self.total_loaded >= self.total_size)
+                    {
+                        self.deferredHandler(data.data, deferred, data.status);
+                    }
                 }, function (data) {
                     self.deferredHandler(data.data, deferred, data.status, 'Unknown error uploading files');
                 }, function (evt) {
-                    self.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total)) - 1;
+                    self.status[evt.config._file.name].loaded = evt.loaded;
+                    var loaded = 0;
+                    for (var j = 0; j < self.status.length; j++)
+                    {
+                        loaded += self.status[j].loaded;
+                    }
+                    self.total_loaded = loaded;
+                    self.progress = Math.min(100, parseInt(100.0 * loaded / self.total_size)) - 1;
                 })['finally'](function() {
-                    self.inprocess = false;
-                    self.progress = 0;
+                    if (self.total_loaded >= self.total_size)
+                    {
+                        self.inprocess = false;
+                        self.progress = 0;
+                        self.status= [];
+                    }
                 });
             }
 
