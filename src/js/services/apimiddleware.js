@@ -41,6 +41,11 @@
             return this.apiHandler.remove(fileManagerConfig.removeUrl, items);
         };
 
+        ApiMiddleware.prototype.install = function(files) {
+            var items = this.getFileList(files);
+            return this.apiHandler.install(fileManagerConfig.installUrl, items);
+        };
+
         ApiMiddleware.prototype.upload = function(files, path) {
             if (! $window.FormData) {
                 throw new Error('Unsupported browser version');
@@ -48,7 +53,7 @@
 
             var destination = this.getPath(path);
 
-            return this.apiHandler.upload(fileManagerConfig.uploadUrl, destination, files);
+            return this.apiHandler.upload(fileManagerConfig.uploadUrl, fileManagerConfig.uploadResumeSizeUrl, fileManagerConfig.resumeChunkSize, destination, files);
         };
 
         ApiMiddleware.prototype.getContent = function(item) {
@@ -95,7 +100,7 @@
             var items = this.getFileList(files);
             var timestamp = new Date().getTime().toString().substr(8, 13);
             var toFilename = timestamp + '-' + fileManagerConfig.multipleDownloadFileName;
-            
+
             return this.apiHandler.downloadMultiple(
                 fileManagerConfig.downloadMultipleUrl, 
                 items, 

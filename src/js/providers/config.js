@@ -9,6 +9,7 @@
 
             listUrl: 'bridges/php/handler.php',
             uploadUrl: 'bridges/php/handler.php',
+            uploadResumeSizeUrl: 'bridges/php/handler.php',
             renameUrl: 'bridges/php/handler.php',
             copyUrl: 'bridges/php/handler.php',
             moveUrl: 'bridges/php/handler.php',
@@ -21,6 +22,7 @@
             compressUrl: 'bridges/php/handler.php',
             extractUrl: 'bridges/php/handler.php',
             permissionsUrl: 'bridges/php/handler.php',
+            installUrl: 'bridges/php/handler.php',
             basePath: '/',
 
             searchForm: true,
@@ -41,6 +43,7 @@
                 preview: true,
                 remove: true,
                 createFolder: true,
+                install: true,
                 pickFiles: false,
                 pickFolders: false
             },
@@ -56,10 +59,12 @@
             compressAsync: false,
             extractAsync: false,
             pickCallback: null,
+            resumeChunkSize: 10485760,
 
             isEditableFilePattern: /\.(txt|diff?|patch|svg|asc|cnf|cfg|conf|html?|.html|cfm|cgi|aspx?|ini|pl|py|md|css|cs|js|jsp|log|htaccess|htpasswd|gitignore|gitattributes|env|json|atom|eml|rss|markdown|sql|xml|xslt?|sh|rb|as|bat|cmd|cob|for|ftn|frm|frx|inc|lisp|scm|coffee|php[3-6]?|java|c|cbl|go|h|scala|vb|tmpl|lock|go|yml|yaml|tsv|lst)$/i,
             isImageFilePattern: /\.(jpe?g|gif|bmp|png|svg|tiff?)$/i,
             isExtractableFilePattern: /\.(gz|tar|rar|g?zip)$/i,
+            isInstallableFilePattern: /\.(pkg)$/i,
             tplPath: 'src/templates'
         };
 

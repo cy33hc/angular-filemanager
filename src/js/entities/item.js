@@ -52,11 +52,15 @@
         };
 
         Item.prototype.isCompressible = function() {
-            return this.isFolder();
+            return true;
         };
 
         Item.prototype.isExtractable = function() {
             return !this.isFolder() && fileManagerConfig.isExtractableFilePattern.test(this.model.name);
+        };
+
+        Item.prototype.isInstallable = function() {
+            return !this.isFolder() && fileManagerConfig.isInstallableFilePattern.test(this.model.name);
         };
 
         Item.prototype.isSelectable = function() {

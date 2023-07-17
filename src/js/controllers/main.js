@@ -197,9 +197,6 @@
 
         $scope.download = function() {
             var item = $scope.singleSelection();
-            if ($scope.selectionHas('dir')) {
-                return;
-            }
             if (item) {
                 return $scope.apiMiddleware.download(item);
             }
@@ -279,6 +276,21 @@
             $scope.apiMiddleware.remove($scope.temps).then(function() {
                 $scope.fileNavigator.refresh();
                 $scope.modal('remove', true);
+            });
+        };
+
+        $scope.isInstallable = function() {
+            for (var i=0; i < $scope.temps.length; i++)
+            {
+                if ($scope.temps[i].isFolder() || !$scope.temps[i].isInstallable())
+                    return false;
+            }
+            return true;
+        };
+
+        $scope.install = function() {
+            $scope.apiMiddleware.install($scope.temps).then(function() {
+                $scope.fileNavigator.refresh();
             });
         };
 

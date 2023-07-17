@@ -121,25 +121,43 @@
             return deferred.promise;
         };
 
-        ApiHandler.prototype.upload = function(apiUrl, destination, files) {
+        ApiHandler.prototype.install = function(apiUrl, items) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'install',
+                items: items
+            };
+
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).then(function(response) {
+                self.deferredHandler(response.data, deferred, response.status);
+            }, function(response) {
+                self.deferredHandler(response.data, deferred, response.status, $translate.instant('error_installing'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.upload = function(apiUrl, uploadResumeSizeUrl, resumeChunkSize, destination, files) {
             var self = this;
             var deferred = $q.defer();
             self.inprocess = true;
             self.progress = 0;
             self.error = '';
 
-            var data = {
-                destination: destination
-            };
-
             for (var i = 0; i < files.length; i++) {
-                data['file-' + i] = files[i];
-            }
-
-            if (files && files.length) {
+                var data = {
+                    destination: destination,
+                    file: files[i]
+                };
                 Upload.upload({
                     url: apiUrl,
-                    data: data
+                    data: data,
+                    resumeSizeUrl: uploadResumeSizeUrl + '?destination=' + encodeURIComponent(destination) + '&filename=' + encodeURIComponent(files[i].name),
+                    resumeChunkSize: resumeChunkSize
                 }).then(function (data) {
                     self.deferredHandler(data.data, deferred, data.status);
                 }, function (data) {
