@@ -61,7 +61,7 @@
             </a>
         </li>
 
-        <li ng-show="config.allowedActions.compress && (!singleSelection() || selectionHas('dir'))">
+        <li ng-show="config.allowedActions.compress">
             <a href="" tabindex="-1" ng-click="modal('compress')">
                 <i class="glyphicon glyphicon-compressed"></i> {{'compress' | translate}}
             </a>
