@@ -118,6 +118,12 @@
             return item;
         };
 
+        $scope.prepareInstallUrl = function() {
+            var item = new Item(null, null);
+            $scope.temps = [item];
+            return item;
+        };
+
         $scope.smartClick = function(item) {
             var pick = $scope.config.allowedActions.pickFiles;
             if (item.isFolder()) {
@@ -329,6 +335,17 @@
             $scope.apiMiddleware.createFolder(item).then(function() {
                 $scope.fileNavigator.refresh();
                 $scope.modal('newfolder', true);
+            });
+        };
+
+        $scope.installUrl = function() {
+            var item = $scope.singleSelection();
+            var name = item.tempModel.name;
+            if (!name) {
+                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_installing_url');
+            }
+            $scope.apiMiddleware.installUrl(item).then(function() {
+                $scope.modal('install_url', true);
             });
         };
 

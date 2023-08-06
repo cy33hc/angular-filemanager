@@ -23,6 +23,7 @@
             extractUrl: 'bridges/php/handler.php',
             permissionsUrl: 'bridges/php/handler.php',
             installUrl: 'bridges/php/handler.php',
+            installUrlUrl: 'bridges/php/handler.php',
             basePath: '/',
 
             searchForm: true,
@@ -44,6 +45,7 @@
                 remove: true,
                 createFolder: true,
                 install: true,
+                install_url: true,
                 pickFiles: false,
                 pickFolders: false
             },

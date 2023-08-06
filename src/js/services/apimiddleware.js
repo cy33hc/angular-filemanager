@@ -134,6 +134,11 @@
             return this.apiHandler.createFolder(fileManagerConfig.createFolderUrl, path);
         };
 
+        ApiMiddleware.prototype.installUrl = function(item) {
+            var name = item.tempModel.name;
+            return this.apiHandler.installUrl(fileManagerConfig.installUrlUrl, name);
+        };
+
         return ApiMiddleware;
 
     }]);

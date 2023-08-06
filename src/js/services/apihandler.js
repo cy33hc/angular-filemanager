@@ -407,6 +407,27 @@
             return deferred.promise;
         };
 
+        ApiHandler.prototype.installUrl = function(apiUrl, name) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'installUrl',
+                url: name
+            };
+
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).then(function(response) {
+                self.deferredHandler(response.data, deferred, response.status);
+            }, function(response) {
+                self.deferredHandler(response.data, deferred, response.status, $translate.instant('error_installing_url'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+
+            return deferred.promise;
+        };
+
         return ApiHandler;
 
     }]);
