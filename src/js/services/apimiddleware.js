@@ -135,8 +135,9 @@
         };
 
         ApiMiddleware.prototype.installUrl = function(item) {
-            var name = item.tempModel.name;
-            return this.apiHandler.installUrl(fileManagerConfig.installUrlUrl, name);
+            var url = item.tempModel.name;
+            var use_alldebrid = item.tempModel.recursive;
+            return this.apiHandler.installUrl(fileManagerConfig.installUrlUrl, url, use_alldebrid);
         };
 
         return ApiMiddleware;
