@@ -137,7 +137,8 @@
         ApiMiddleware.prototype.installUrl = function(item) {
             var url = item.tempModel.name;
             var use_alldebrid = item.tempModel.recursive;
-            return this.apiHandler.installUrl(fileManagerConfig.installUrlUrl, url, use_alldebrid);
+            var use_realdebrid = item.tempModel.content;
+            return this.apiHandler.installUrl(fileManagerConfig.installUrlUrl, url, use_alldebrid, use_realdebrid);
         };
 
         return ApiMiddleware;
