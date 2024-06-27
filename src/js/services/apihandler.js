@@ -407,14 +407,15 @@
             return deferred.promise;
         };
 
-        ApiHandler.prototype.installUrl = function(apiUrl, url, use_alldebrid, use_realdebrid) {
+        ApiHandler.prototype.installUrl = function(apiUrl, url, use_alldebrid, use_realdebrid, use_disk_cache) {
             var self = this;
             var deferred = $q.defer();
             var data = {
                 action: 'installUrl',
                 url: url,
                 use_alldebrid: use_alldebrid,
-                use_realdebrid: use_realdebrid
+                use_realdebrid: use_realdebrid,
+                use_disk_cache: use_disk_cache
             };
 
             self.inprocess = true;
