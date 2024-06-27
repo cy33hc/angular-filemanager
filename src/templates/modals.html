@@ -325,11 +325,11 @@
             <div class="modal-body">
               <label class="radio">{{'url' | translate}}</label>
               <input class="form-control" ng-model="singleSelection().tempModel.name" autofocus="autofocus"><br/>
-              <input type="checkbox" checked="false" class="form-check-input" ng-model="singleSelection().tempModel.recursive">
+              <input type="checkbox" class="form-check-input" ng-model="singleSelection().tempModel.use_alldebrid">
               <label class="form-check-label">{{'install_with_alldebrid' | translate}}</label><br/>
-              <input type="checkbox" checked="false" class="form-check-input" ng-model="singleSelection().tempModel.content">
+              <input type="checkbox" class="form-check-input" ng-model="singleSelection().tempModel.use_realdebrid">
               <label class="form-check-label">{{'install_with_realdebrid' | translate}}</label><br/>
-              <input type="checkbox" checked="false" class="form-check-input" ng-model="singleSelection().tempModel.type">
+              <input type="checkbox" class="form-check-input" ng-model="singleSelection().tempModel.use_disk_cache">
               <label class="form-check-label">{{'install_use_disk_cache' | translate}}</label>
               <div ng-include data-src="'error-bar'" class="clearfix"></div>
             </div>

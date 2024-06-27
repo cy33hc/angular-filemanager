@@ -136,11 +136,9 @@
 
         ApiMiddleware.prototype.installUrl = function(item) {
             var url = item.tempModel.name;
-            var use_alldebrid = item.tempModel.recursive;
-            var use_realdebrid = true;
-            var use_disk_cache = true;
-            if (item.tempModel.content == "") { use_realdebrid = false; }
-            if (item.tempModel.type == "file") { use_disk_cache = false; }
+            var use_alldebrid = item.tempModel.use_alldebrid;
+            var use_realdebrid = item.tempModel.use_realdebrid;
+            var use_disk_cache = item.tempModel.use_disk_cache;
             return this.apiHandler.installUrl(fileManagerConfig.installUrlUrl, url, use_alldebrid, use_realdebrid, use_disk_cache);
         };
 
