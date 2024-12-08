@@ -294,12 +294,6 @@
             return true;
         };
 
-        $scope.install = function() {
-            $scope.apiMiddleware.install($scope.temps).then(function() {
-                $scope.fileNavigator.refresh();
-            });
-        };
-
         $scope.move = function() {
             var anyItem = $scope.singleSelection() || $scope.temps[0];
             if (anyItem && validateSamePath(anyItem)) {
@@ -338,14 +332,14 @@
             });
         };
 
-        $scope.installUrl = function() {
+        $scope.downloadUrl = function() {
             var item = $scope.singleSelection();
             var name = item.tempModel.name;
             if (!name) {
-                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_installing_url');
+                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_downloading_url');
             }
-            $scope.apiMiddleware.installUrl(item).then(function() {
-                $scope.modal('install_url', true);
+            $scope.apiMiddleware.downloadUrl(item).then(function() {
+                $scope.modal('download_url', true);
             });
         };
 

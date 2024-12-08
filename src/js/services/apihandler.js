@@ -121,26 +121,6 @@
             return deferred.promise;
         };
 
-        ApiHandler.prototype.install = function(apiUrl, items) {
-            var self = this;
-            var deferred = $q.defer();
-            var data = {
-                action: 'install',
-                items: items
-            };
-
-            self.inprocess = true;
-            self.error = '';
-            $http.post(apiUrl, data).then(function(response) {
-                self.deferredHandler(response.data, deferred, response.status);
-            }, function(response) {
-                self.deferredHandler(response.data, deferred, response.status, $translate.instant('error_installing'));
-            })['finally'](function() {
-                self.inprocess = false;
-            });
-            return deferred.promise;
-        };
-
         ApiHandler.prototype.upload = function(apiUrl, uploadResumeSizeUrl, resumeChunkSize, destination, files) {
             var self = this;
             var deferred = $q.defer();
@@ -407,15 +387,14 @@
             return deferred.promise;
         };
 
-        ApiHandler.prototype.installUrl = function(apiUrl, url, use_alldebrid, use_realdebrid, use_disk_cache) {
+        ApiHandler.prototype.downloadUrl = function(apiUrl, url, use_alldebrid, use_realdebrid) {
             var self = this;
             var deferred = $q.defer();
             var data = {
-                action: 'installUrl',
+                action: 'downloadUrl',
                 url: url,
                 use_alldebrid: use_alldebrid,
-                use_realdebrid: use_realdebrid,
-                use_disk_cache: use_disk_cache
+                use_realdebrid: use_realdebrid
             };
 
             self.inprocess = true;
@@ -423,7 +402,7 @@
             $http.post(apiUrl, data).then(function(response) {
                 self.deferredHandler(response.data, deferred, response.status);
             }, function(response) {
-                self.deferredHandler(response.data, deferred, response.status, $translate.instant('error_installing_url'));
+                self.deferredHandler(response.data, deferred, response.status, $translate.instant('error_downloading_url'));
             })['finally'](function() {
                 self.inprocess = false;
             });

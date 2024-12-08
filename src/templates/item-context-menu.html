@@ -73,12 +73,6 @@
             </a>
         </li>
 
-        <li ng-show="config.allowedActions.install && isInstallable()">
-            <a href="" tabindex="-1" ng-click="install()">
-                <i class="glyphicon glyphicon-wrench"></i> {{'install' | translate}}
-            </a>
-        </li>
-
         <li class="divider" ng-show="config.allowedActions.remove"></li>
         
         <li ng-show="config.allowedActions.remove">
@@ -100,9 +94,9 @@
                 <i class="glyphicon glyphicon-cloud-upload"></i> {{'upload_files' | translate}}
             </a>
         </li>
-        <li ng-show="config.allowedActions.install_url">
-            <a href="" tabindex="-1" ng-click="modal('install_url') && prepareInstallUrl()">
-                <i class="glyphicon glyphicon-wrench"></i> {{'install_url' | translate}}
+        <li ng-show="config.allowedActions.download_url">
+            <a href="" tabindex="-1" ng-click="modal('download_url') && prepareInstallUrl()">
+                <i class="glyphicon glyphicon-wrench"></i> {{'download_url' | translate}}
             </a>
         </li>
     </ul>

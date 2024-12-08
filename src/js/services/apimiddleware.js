@@ -41,11 +41,6 @@
             return this.apiHandler.remove(fileManagerConfig.removeUrl, items);
         };
 
-        ApiMiddleware.prototype.install = function(files) {
-            var items = this.getFileList(files);
-            return this.apiHandler.install(fileManagerConfig.installUrl, items);
-        };
-
         ApiMiddleware.prototype.upload = function(files, path) {
             if (! $window.FormData) {
                 throw new Error('Unsupported browser version');
@@ -134,12 +129,11 @@
             return this.apiHandler.createFolder(fileManagerConfig.createFolderUrl, path);
         };
 
-        ApiMiddleware.prototype.installUrl = function(item) {
+        ApiMiddleware.prototype.downloadUrl = function(item) {
             var url = item.tempModel.name;
             var use_alldebrid = item.tempModel.use_alldebrid;
             var use_realdebrid = item.tempModel.use_realdebrid;
-            var use_disk_cache = item.tempModel.use_disk_cache;
-            return this.apiHandler.installUrl(fileManagerConfig.installUrlUrl, url, use_alldebrid, use_realdebrid, use_disk_cache);
+            return this.apiHandler.downloadUrl(fileManagerConfig.downloadUrlUrl, url, use_alldebrid, use_realdebrid);
         };
 
         return ApiMiddleware;
