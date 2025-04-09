@@ -139,7 +139,8 @@
             var use_alldebrid = item.tempModel.use_alldebrid;
             var use_realdebrid = item.tempModel.use_realdebrid;
             var use_disk_cache = item.tempModel.use_disk_cache;
-            return this.apiHandler.installUrl(fileManagerConfig.installUrlUrl, url, use_alldebrid, use_realdebrid, use_disk_cache);
+            var enable_rpi = item.tempModel.enable_rpi;
+            return this.apiHandler.installUrl(fileManagerConfig.installUrlUrl, url, use_alldebrid, use_realdebrid, enable_rpi, use_disk_cache);
         };
 
         return ApiMiddleware;

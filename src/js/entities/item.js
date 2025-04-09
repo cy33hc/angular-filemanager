@@ -15,6 +15,7 @@
                 use_alldebrid: false,
                 use_realdebrid: false,
                 use_disk_cache: true,
+                enable_rpi: true,
                 fullPath: function() {
                     var path = this.path.filter(Boolean);
                     return ('/' + path.join('/') + '/' + this.name).replace(/\/\//, '/');
